@@ -45,7 +45,7 @@ public class ilyaConfiguration implements WebMvcConfigurer {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("");
-        templateResolver.setSuffix("");
+        templateResolver.setSuffix(".html");
         return templateResolver;
     }
 
