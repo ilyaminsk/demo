@@ -8,14 +8,14 @@ on:
 
 
 jobs:
-  deploy:
+deploy:
     name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
 
     steps:
     
          - name: Checkout the files
-        uses: actions/checkout@v2
+            uses: actions/checkout@v2
 
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
