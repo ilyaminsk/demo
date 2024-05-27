@@ -5,18 +5,18 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 public class Song {
-	int songID;
+	String songID;
 	String Name;
 	String Style;
 	int Duration;
 	enum Rating  {good,bad,netural};
 	Rating rating;
 	
-	public int getSongID() {
+	public String getSongID() {
 		return songID;
 	}
-	public void setSongID(int songID) {
-		this.songID = songID;
+	public void setSongID(String iD) {
+		this.songID = iD;
 	}
 	public String getName() {
 		return Name;

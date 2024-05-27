@@ -1,17 +1,38 @@
 package com.example.demo;
 
+
+
+import java.util.Scanner;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.example.demo.MusicPlayer.ID;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.example.demo.model.Song;
 import com.example.demo.repo.SongRepo;
 
-@SpringBootApplication
 
-public class DemoApplication {
+
+
+
+@SpringBootApplication
+@Controller
+
+
+public class DemoApplication extends  SpringBootServletInitializer {
+		
+	 @Override
+	    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) { 
+	        return builder.sources(DemoApplication.class);}
+	    
 	public static org.springframework.context.ApplicationContext applicationContext;
 
+	
 	public static void main(String[] args) {
+
 		applicationContext = SpringApplication.run(DemoApplication.class, args);
 
 		String[] allBeanNames = applicationContext.getBeanDefinitionNames();
@@ -19,7 +40,8 @@ public class DemoApplication {
 			System.out.println(beanName);
 		}
 
-		Song song = applicationContext.getBean(Song.class);
+		
+		Song song= applicationContext.getBean(Song.class);
 		MusicPlayer musicPlayer = applicationContext.getBean(MusicPlayer.class);
 		song.setName("Yulia playing ");
 		song.setStyle("Rock");
@@ -29,10 +51,10 @@ public class DemoApplication {
 
 		System.out.println(song);
 
-		songRepo.save(song);
+	//	songRepo.save(song);
 
-		System.out.println(songRepo.findAll());
-
-		musicPlayer.playMusicList(ID.Rock);
+	//	musicPlayer.playMusicList(ID.Rock);
 	}
+
+	 
 }

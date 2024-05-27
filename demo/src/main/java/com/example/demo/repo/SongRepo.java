@@ -1,4 +1,4 @@
-package com.example.demo.repo;
+	package com.example.demo.repo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +38,7 @@ public class SongRepo {
 			public Song mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 				Song s = new Song();
-				s.setSongID(rs.getInt(1));
+				s.setSongID(rs.getString(1));
 				s.setName(rs.getString("Name"));
 				s.setStyle(rs.getString("style"));
 				s.setDuration(rs.getInt("duration"));

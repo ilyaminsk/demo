@@ -1,35 +1,19 @@
-package com.example.demo.view;
+package com.example.demo;
 
-import javax.sql.DataSource;
 
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-
-import com.example.demo.ClassicMusic;
-import com.example.demo.MusicListBuilder;
-import com.example.demo.MusicPlayer;
-import com.example.demo.RockMusic;
-import com.example.demo.repo.SongRepo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 
-
-
-
  @Configuration
- @EnableWebMvc
 @ComponentScan("demo")
-
-public class ilyaConfiguration implements WebMvcConfigurer {
+public class ilyaConfiguration  {
 	 
 	@Autowired 
 	 private final ApplicationContext applicationContext ;
@@ -45,7 +29,7 @@ public class ilyaConfiguration implements WebMvcConfigurer {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("");
-        templateResolver.setSuffix(".html");
+        templateResolver.setSuffix("");
         return templateResolver;
     }
 
@@ -57,13 +41,19 @@ public class ilyaConfiguration implements WebMvcConfigurer {
         return templateEngine;
     }
 
-    @Override
+    
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
 
+    @Bean
+    IsValidNumberOnly  ssValidNumberOnly() {
+    	
+    	return new IsValidNumberOnly();
+    }
+    
 	@Bean
     RockMusic rockMusic() {
 		return new RockMusic();
@@ -84,13 +74,13 @@ public class ilyaConfiguration implements WebMvcConfigurer {
     	return new MusicPlayer(classicMusic(),rockMusic(), mb() );	
     }
     
-    @Bean 
-    JdbcTemplate template(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
-    @Bean 
-    SongRepo songRepo(JdbcTemplate template) {
-    return new SongRepo(template);
-    }
+//    @Bean 
+//    JdbcTemplate template(DataSource dataSource) {
+//        return new JdbcTemplate(dataSource);
+//    }
+//    @Bean 
+//    SongRepo songRepo(JdbcTemplate template) {
+//    return new SongRepo(template);
+//    }
     
     }
