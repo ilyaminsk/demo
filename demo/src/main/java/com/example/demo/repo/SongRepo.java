@@ -5,10 +5,13 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import com.example.demo.model.Song;
+import org.springframework.stereotype.Component;
 
+import com.example.demo.model.Song;
+@Component
 public class SongRepo {
 
+	
 	private JdbcTemplate template;
 
 	public SongRepo(JdbcTemplate template) {
@@ -16,11 +19,13 @@ public class SongRepo {
 	}
 
 	public void save(Song song) {
-
 		String sql = "insert into song (name,style,duration) values (?,?,?)";
-		int oo = template.update(sql, song.getName(), song.getStyle(), song.getDuration());
-		System.out.println(oo);
-
+		template.update(sql, song.getName(), song.getStyle(), song.getDuration());
+	}
+	
+	public void delete(int id) {
+		String sql ="DELETE FROM song WHERE songID = ?";
+		template.update(sql, id);
 	}
 
 	public List<Song> findAll() {
