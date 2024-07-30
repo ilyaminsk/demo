@@ -4,11 +4,15 @@ package com.example.demo;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+
+import com.example.demo.repo.SongRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 
  @Configuration
@@ -48,11 +52,7 @@ public class ilyaConfiguration  {
         registry.viewResolver(resolver);
     }
 
-    @Bean
-    IsValidNumberOnly  ssValidNumberOnly() {
-    	
-    	return new IsValidNumberOnly();
-    }
+    
     
 	@Bean
     RockMusic rockMusic() {
@@ -78,9 +78,9 @@ public class ilyaConfiguration  {
 //    JdbcTemplate template(DataSource dataSource) {
 //        return new JdbcTemplate(dataSource);
 //    }
-//    @Bean 
-//    SongRepo songRepo(JdbcTemplate template) {
-//    return new SongRepo(template);
-//    }
+    @Bean 
+    SongRepo songRepo(JdbcTemplate template) {
+    return new SongRepo(template);
+    }
     
     }

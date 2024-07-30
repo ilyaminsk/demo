@@ -12,10 +12,10 @@ import com.example.demo.model.Song;
 public class SongRepo {
 
 	
-	private JdbcTemplate template;
+	private static JdbcTemplate template;
 
 	public SongRepo(JdbcTemplate template) {
-		this.template = template;
+		SongRepo.template = template;
 	}
 
 	public void save(Song song) {
@@ -28,7 +28,7 @@ public class SongRepo {
 		template.update(sql, id);
 	}
 
-	public List<Song> findAll() {
+	public   List<Song> findAll() {
 
 		String sql = "select * from song";
 

@@ -2,6 +2,7 @@ package com.example.demo;
 
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.springframework.boot.SpringApplication;
@@ -51,8 +52,18 @@ public class DemoApplication extends  SpringBootServletInitializer {
 
 		System.out.println(song);
 
-	//	songRepo.save(song);
+		songRepo.save(song);
+		ArrayList<Song> list = (ArrayList<Song>) songRepo.findAll();
+		
+		for (Song listSong: list) 
+				{
+			System.out.println(listSong.getName());
+		}
 
+		PostController post = new PostController(null);
+		post.check();
+		
+		
 	//	musicPlayer.playMusicList(ID.Rock);
 	}
 
