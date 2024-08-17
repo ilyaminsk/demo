@@ -3,6 +3,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -10,13 +12,16 @@ import org.springframework.stereotype.Component;
 import com.example.demo.model.Song;
 @Component
 public class SongRepo {
-
-	
+	@Autowired
 	private static JdbcTemplate template;
 
 	public SongRepo(JdbcTemplate template) {
 		SongRepo.template = template;
 	}
+	
+	public void  test() {
+		System.out.println("fff");
+	};
 
 	public void save(Song song) {
 		String sql = "insert into song (name,style,duration) values (?,?,?)";
@@ -38,9 +43,9 @@ public class SongRepo {
 			public Song mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 				Song s = new Song();
-				s.setSongID(rs.getString(1));
+				s.setSongID(rs.getInt(1));
 				s.setName(rs.getString("Name"));
-				s.setStyle(rs.getString("style"));
+				s.setStyle(rs.getString("Style"));
 				s.setDuration(rs.getInt("duration"));
 				return s;
 			}

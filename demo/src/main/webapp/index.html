@@ -1,81 +1,104 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>My First</title>
+	<meta charset="UTF-8">
+	<title>My First</title>
 
-<style>
-table {
-	border-collapse: collapse;
-	/* Ensures borders are drawn around individual cells instead of a single border around the table */
-	width: 20%; /* Optional: Set a width for the table */
-}
+	<style>
+		table {
+			border-collapse: collapse;
+			/* Ensures borders are drawn around individual cells instead of a single border around the table */
+			width: 20%;
+			/* Optional: Set a width for the table */
+		}
 
-th, td {
+		th,
+		td {
 
-	overflow: hidden;
-    text-overflow: ellipsis;
-    
-	border: 3px solid black;
-	/* Define border style and thickness for cells */
-	padding: 3px; /* Optional: Add padding for content within cells */
-}
+			overflow: hidden;
+			text-overflow: ellipsis;
 
-th {
-	background-color: #a2b2d3;
-	/* Optional: Set background color for table header row */
-}
-</style>
-</head>
-<body>
+			border: 3px solid black;
+			/* Define border style and thickness for cells */
+			padding: 3px;
+			/* Optional: Add padding for content within cells */
+		}
 
-   <p th:text="${added}"></p>
-  <p th:text="${deleted}"></p>
-  
-
-
-<!--  <div th:if="${songsList}!=null"> -->
-	<div style="height: 50vh; overflow-y: scroll;overflow-x:scroll;"> 
-		<table>
-  <tr>
-    <th>ID</th>
-    <th>NAME</th>
-  </tr>
+		th {
+			background-color: #a2b2d3;
+			/* Optional: Set background color for table header row */
+		}
 		
-  <tr th:each="item : ${songsList}">	
-    <td th:text="${item.getSongID}">ID</td>
-    <td th:text="${item.getName}">NAME</td>
-  </tr>
-</table>
+	</style>
+	
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<button id="openPopup">Open Popup</button>
+
+	<div id="popup" class="modal">
+	  <div class="modal-content">
+	    <span class="close">&times;</span>
+	    <h2 th:text="${popupTitle}">This is a Popup Alert</h2>
+	    <p th:text="${popupMessage}">Some important message.</p>
+	  </div>
+	</div>
+
+	 <script src="script.js"></script>
+		
+
+	<p th:text="${added}"></p>
+	<!--  <p th:text="${deleted}"></p> -->
+
+
+
+	<!--  <div th:if="${songsList}!=null"> -->
+	<div style="height: 50vh; overflow-y: scroll;overflow-x:scroll;">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>NAME</th>
+			</tr>
+
+			<tr th:each="item : ${songs}">
+				<td th:text="${item.getSongID}">ID</td>
+				<td th:text="${item.getName}">NAME</td>
+			</tr>
+		</table>
 
 	</div>
 	<p>Enter ID to delete:</p>
 
-		<form method="POST" action="delete">
-			<input type="text" name="id"> <INPUT type="submit">
-		</form>
-	<div>
-	<p> Enter ID number and song Name </p>
-	<form method="POST" action="addSong" target="_self">
-	<input type="text" name="ID"> <input type="text" name="songName"> 
-	
-	<INPUT	type="submit">
+	<form method="POST" action="delete">
+		<input type="text" name="id"> <INPUT type="submit">
 	</form>
+	<div>
+		<p> Enter ID number and song Name </p>
+		<form method="POST" action="addSong" target="_self">
+			<input type="text" name="ID"> <input type="text" placeholder="Enter name of the song  here" name="songName">
+			
+	
+
+			<INPUT type="submit">
+		</form>
 	</div>
 
 
 
-	
+
 
 	<a href="calculator" target="_blank">Go multi task calculator</a>
 	<br>
-	
+
 	<p>
 		<a href="../" th:href="@{/}">Return to home</a>
 	</p>
-  </div>
-  
- 
+	</div>
+
+
 </body>
+
 </html>
